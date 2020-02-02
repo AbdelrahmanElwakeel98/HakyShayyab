@@ -1,0 +1,119 @@
+<resources>
+    <string name="app_name">Haky Sheyyab</string>
+
+    <!-- ==== Bedouin Registration === -->
+    <string name="txt_bedouin_register">I\'m a Bedouin</string>
+
+    <!-- ==== Bedouin Registration === -->
+    <string name="txt_user_register">I\'m a User</string>
+
+    <!-- === Sign up button === -->
+    <string name="signUp_btn">Sign Up</string>
+
+    <string name="verification_title">Verification Code</string>
+    <string name="verify">Verify</string>
+    <string name="resend">Resend</string>
+
+    <!-- === Login & Sign up Layout === -->
+    <string name="login_username_hint">Username</string>
+    <string name="login_country_code_hint">Code</string>
+    <string name="login_phone_hint">Phone Number</string>
+    <string name="login_tribe_hint">Tribe</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_confirm_password_hint">Confirm Password</string>
+    <string name="wrong_answers">Please, Register as a user.</string>
+    <string name="questions">Please, Answer These Questions.</string>
+    <string name="empty_user">Please, Enter an username.</string>
+    <string name="empty_phone">Please, Enter a phone number.</string>
+    <string name="invalid_phone">Phone number must be 11 digits!</string>
+    <string name="empty_password">Please, Enter a password.</string>
+    <string name="weak_password">Password too short, enter minimum 6 characters!</string>
+    <string name="empty_confirm">Please, Re-Enter the password.</string>
+    <string name="confirm_match">The two passwords must be identical.</string>
+    <string name="empty_tribe">Please, Enter your tribe.</string>
+    <string name="empty_code">Please, Enter your country code.</string>
+    <string name="login_btn">LOGIN</string>
+    <string name="finish_btn">Finish</string>
+
+    <string name="dictionary_section">Dictionary</string>
+    <string name="dictionary_section_add">Add a bedouin word</string>
+
+    <string name="questions_section">Questions</string>
+    <string name="questions_section_add">Add a question</string>
+    <string name="questions_section_add_answer">Add an answer</string>
+
+    <string name="exp_section">Experience</string>
+    <string name="manual_section">Bedouin Manual</string>
+
+    <string name="add">Add</string>
+
+    <string name="dictionary_word">Word</string>
+    <string name="dictionary_word_translated">Meaning</string>
+
+    <string name="question_add">Your Question</string>
+    <string name="answer_add">Your Answer</string>
+
+    <string name="search">Search</string>
+
+    <string name="manual_dashboard_songs">Poems and Songs</string>
+    <string name="manual_dashboard_medicine">Medicine Recipes</string>
+    <string name="manual_dashboard_clothing">Face Tattooing, Clothing</string>
+    <string name="manual_dashboard_cooking">Bonfire Cooking</string>
+    <string name="manual_dashboard_handcrafting">Carpet Handcrafting</string>
+
+    <string name="add_manual_dashboard_songs">Add a poem or a song</string>
+    <string name="add_manual_dashboard_medicine">Add a medicine recipe</string>
+    <string name="add_manual_dashboard_clothing">Add a face tattooing, clothing</string>
+    <string name="add_manual_dashboard_cooking">Add a bonfire cooking</string>
+    <string name="add_manual_dashboard_handcrafting">Add a carpet handcrafting</string>
+
+    <string name="headline">Headline</string>
+    <string name="detailed_description">Detailed description</string>
+    <string name="location">Location</string>
+
+    <string name="adventure_description">Set off an adventure with a bedouin</string>
+    <string name="cooking_description">Join locals cooking some amazing food \non bonfire</string>
+
+    <string name="adventure">Adventure</string>
+    <string name="cooking">Bedouin Food</string>
+
+    <string name="upload">Upload</string>
+
+    <string name="play">Play</string>
+    <string name="stop">Pause</string>
+
+    <string name="rating">Rating</string>
+
+    <string name="dashboard">Dashboard</string>
+
+    <string name="incorrect_otp">Incorrect OTP</string>
+    <string name="code_sent">Code Sent</string>
+    <string name="verification_success">Verification Completed</string>
+    <string name="verification_fail">Verification Failed</string>
+
+    <string name="select_category">Select The Category</string>
+
+    <string name="search_result">Word -> Meaning</string>
+
+    <string name="select_file">Select File</string>
+
+    <string name="question_one">How many knobs are there in a Bedouin house?</string>
+    <string name="question_two">What\'s a "خوصة"?</string>
+    <string name="question_three">How many poles in a Bedouin House?</string>
+
+    <string name="q1_answer1">10</string>
+    <string name="q1_answer2">14</string>
+    <string name="q1_answer3">16</string>
+
+    <string name="q2_answer1">Knife</string>
+    <string name="q2_answer2">Spoon</string>
+    <string name="q2_answer3">Fork</string>
+
+    <string name="q3_answer1">1</string>
+    <string name="q3_answer2">2</string>
+    <string name="q3_answer3">4</string>
+
+
+
+
+</resources>

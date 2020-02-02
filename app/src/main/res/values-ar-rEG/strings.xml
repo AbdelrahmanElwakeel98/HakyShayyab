@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">حكى شياب</string>
+
+    <!-- ===== Bedouin Registration ===== -->
+    <string name="txt_bedouin_register">أنا بدوي</string>
+
+    <!-- ==== Non-Bedouin Registration ==== -->
+    <string name="txt_user_register">أنا مستخدم</string>
+
+    <!-- === Login === -->
+    <string name="signUp_btn">تسجيل الدخول</string>
+
+    <string name="verification_title">الكود التأكيدي</string>
+    <string name="verify">تأكيد</string>
+    <string name="resend">اعادة ارسال الكود</string>
+
+    <!-- === Login Layout === -->
+    <string name="login_username_hint">اسم المستخدم</string>
+    <string name="login_country_code_hint">كود</string>
+    <string name="login_phone_hint">رقم الهاتف</string>
+    <string name="login_password_hint">كلمة السر</string>
+    <string name="login_tribe_hint">القبيلة</string>
+    <string name="login_confirm_password_hint">تأكيد كلمة السر</string>
+    <string name="wrong_answers">الرجاء الدخول كمستخدم</string>
+    <string name="questions">الرجاء أجب عن هذه الاسئلة</string>
+    <string name="empty_user">الرجاء قم بادخال اسم المستخدم.</string>
+    <string name="empty_phone">الرجاء قم بادخال رقم الهاتف الخاص بك.</string>
+    <string name="invalid_phone">رقم الهاتف يجب أن يكون 11 أرقام.</string>
+    <string name="empty_password">.الرجاء قم بكتابة كلمة السر التي تريد استخدامها</string>
+    <string name="empty_confirm">الرجاء القيام بادخال كلمة السر مرة أخري.</string>
+    <string name="weak_password">كلمة السر قصيرة جدًا، فالحد أدني 6 حروف/أرقام.</string>
+    <string name="confirm_match">كلمتي السر يجب أن يكونوا متشابهين.</string>
+    <string name="empty_tribe">الرجاء قم بادخال اسم القبيلة التي تنتمي اليها.</string>
+    <string name="empty_code">الرجاء قم بادخال كود الدولة الخاصة بك.</string>
+    <string name="login_btn">دخول</string>
+    <string name="finish_btn">انهاء التسجيل</string>
+
+    <string name="dictionary_section">القاموس</string>
+    <string name="dictionary_section_add">أضف كلمة بدوية الي القاموس</string>
+
+    <string name="questions_section">الاسئلة</string>
+    <string name="questions_section_add">أضف سؤالك</string>
+    <string name="questions_section_add_answer">أضف أجابة</string>
+
+    <string name="exp_section">التجارب</string>
+    <string name="manual_section">دليل البدو</string>
+
+    <string name="add">أضف</string>
+
+    <string name="dictionary_word">الكلمة</string>
+    <string name="dictionary_word_translated">المرادف</string>
+
+    <string name="question_add">سؤالك</string>
+    <string name="answer_add">اجابتك</string>
+
+    <string name="search">بحث</string>
+
+    <string name="manual_dashboard_songs">القصائد، والأغاني</string>
+    <string name="manual_dashboard_medicine">الوصفات الطبية</string>
+    <string name="manual_dashboard_clothing">رسوم الوجه، والملابس</string>
+    <string name="manual_dashboard_cooking">الطبخ علي النيران</string>
+    <string name="manual_dashboard_handcrafting">نسج السجاد</string>
+
+    <string name="add_manual_dashboard_songs">أضف قصيدة أو أغنية</string>
+    <string name="add_manual_dashboard_medicine">أضف وصفة طبية</string>
+    <string name="add_manual_dashboard_clothing">أضف رسم للوجه أو صورة لملابس بدوية</string>
+    <string name="add_manual_dashboard_cooking">أصف طعام يُطبخ علي النيران</string>
+    <string name="add_manual_dashboard_handcrafting">أضف سجاد منسوج يدويًا</string>
+
+    <string name="headline">عنوان</string>
+    <string name="detailed_description">وصف مُفصل</string>
+    <string name="location">الموقع</string>
+
+    <string name="adventure_description">انطلق في مغامرة مع بدوي</string>
+    <string name="cooking_description">انضم إلى السكان المحليين الذين يطبخون بعض الأطعمة الرائعة</string>
+
+    <string name="adventure">مغامرة</string>
+    <string name="cooking">أماكن للأكل البدوي</string>
+
+    <string name="upload">ارفع الملف</string>
+
+    <string name="play">تشغيل</string>
+    <string name="stop">ايقاف</string>
+
+    <string name="rating">تقييم</string>
+
+    <string name="dashboard">القائمة الرئيسية</string>
+
+    <string name="incorrect_otp">الكود الذي أدخلته خطأ</string>
+    <string name="code_sent">تم ارسال الكود</string>
+    <string name="verification_success">تم انتهاء التفعيل</string>
+    <string name="verification_fail">التفعيل فشل</string>
+
+    <string name="select_category">قم باختيار القسم</string>
+
+    <string name="search_result">الكلمة -> المعني</string>
+
+    <string name="select_file">اختر الملف الذي تريد رفعه</string>
+
+
+    <string name="question_one">كم عدد العقدالخيمة في البيت البدوي؟</string>
+    <string name="question_two">ما هي الخوصة؟</string>
+    <string name="question_three">كم عدد عمدان البيت البدوي؟</string>
+
+    <string name="q1_answer1">10</string>
+    <string name="q1_answer2">14</string>
+    <string name="q1_answer3">16</string>
+
+    <string name="q2_answer1">سكين</string>
+    <string name="q2_answer2">ملعقة</string>
+    <string name="q2_answer3">شوكة</string>
+
+    <string name="q3_answer1">1</string>
+    <string name="q3_answer2">2</string>
+    <string name="q3_answer3">4</string>
+
+</resources>

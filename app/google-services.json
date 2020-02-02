@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "403976616732",
+    "firebase_url": "https://hakysheyab.firebaseio.com",
+    "project_id": "hakysheyab",
+    "storage_bucket": "hakysheyab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403976616732:android:1d838d36d116e965d818d9",
+        "android_client_info": {
+          "package_name": "com.abdelrahman.irihackathon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403976616732-rff1b64mplfaf62qiul7p0ue4fntfkfi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.abdelrahman.irihackathon",
+            "certificate_hash": "0b684adadd38507b879e774c25f19cdb956139e4"
+          }
+        },
+        {
+          "client_id": "403976616732-0kbhh4sgohag5l1096afv9kvbv3klkg6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkrkfj0_M8Fbxvze3NiuL3X4XqlBVTuf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403976616732-0kbhh4sgohag5l1096afv9kvbv3klkg6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
