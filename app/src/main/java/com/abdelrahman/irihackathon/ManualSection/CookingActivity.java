@@ -1,4 +1,4 @@
-package com.abdelrahman.irihackathon;
+package com.abdelrahman.irihackathon.ManualSection;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,17 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.abdelrahman.irihackathon.Adapter.ManualAdapter;
-import com.abdelrahman.irihackathon.Adapter.QuestionAdapter;
 import com.abdelrahman.irihackathon.Common.Constants;
 import com.abdelrahman.irihackathon.Common.Global;
 import com.abdelrahman.irihackathon.Model.Manual;
-import com.abdelrahman.irihackathon.Model.Question;
-import com.abdelrahman.irihackathon.QuestionSection.AddAnswerActivity;
-import com.abdelrahman.irihackathon.QuestionSection.QuestionCardActivity;
+import com.abdelrahman.irihackathon.R;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -90,7 +86,7 @@ public class CookingActivity extends AppCompatActivity {
                             JSONArray jsonArray = response.getJSONArray("data");
 
 
-
+                            manuals.clear();
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject manual = jsonArray.getJSONObject(i);
 

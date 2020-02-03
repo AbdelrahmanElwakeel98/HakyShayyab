@@ -1,7 +1,7 @@
-package com.abdelrahman.irihackathon;
+package com.abdelrahman.irihackathon.ExperienceSection;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import com.abdelrahman.irihackathon.Adapter.ManualAdapter;
 import com.abdelrahman.irihackathon.Common.Constants;
 import com.abdelrahman.irihackathon.Common.Global;
+import com.abdelrahman.irihackathon.ManualSection.AddActivity;
 import com.abdelrahman.irihackathon.Model.Manual;
+import com.abdelrahman.irihackathon.R;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -27,7 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MedicineActivity extends AppCompatActivity {
+public class AdventureActivity extends AppCompatActivity {
 
     private ImageView back;
     private FloatingActionButton add;
@@ -40,9 +42,9 @@ public class MedicineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medicine);
+        setContentView(R.layout.activity_adventure);
 
-        list = findViewById(R.id.medicine_list);
+        list = findViewById(R.id.adventure_list);
         back = findViewById(R.id.back);
         add = findViewById(R.id.btn_add);
 
@@ -52,7 +54,7 @@ public class MedicineActivity extends AppCompatActivity {
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(MedicineActivity.this, AddActivity.class));
+                    startActivity(new Intent(AdventureActivity.this, AddActivity.class));
                     finish();
                 }
             });
@@ -61,7 +63,7 @@ public class MedicineActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MedicineActivity.this, ManualDashboardActivity.class));
+                startActivity(new Intent(AdventureActivity.this, ExperienceDashboardActivity.class));
                 finish();
             }
         });
@@ -69,12 +71,12 @@ public class MedicineActivity extends AppCompatActivity {
         mQueue = Volley.newRequestQueue(this);
         manuals = new ArrayList<>();
 
-        jsonParse(Global.categoryManual);
+        jsonParse(Global.categoryExperience);
     }
 
     private void jsonParse(String categoryId) {
 
-        String url = Constants.API_URL + "blogs/getBlogs/" + categoryId;
+        String url = Constants.API_URL + "experiences/getExperiences/" + categoryId;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -84,7 +86,7 @@ public class MedicineActivity extends AppCompatActivity {
                             JSONArray jsonArray = response.getJSONArray("data");
 
 
-
+                            manuals.clear();
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject manual = jsonArray.getJSONObject(i);
 
@@ -92,15 +94,19 @@ public class MedicineActivity extends AppCompatActivity {
                                 m.setTitle(manual.getString("title"));
                                 m.setDescription(manual.getString("body"));
                                 m.setAddedBy(manual.getString("addedBy"));
-                                m.setBlogID(manual.getString("blogID"));
+                                m.setBlogID(manual.getString("experienceID"));
                                 m.setMedia(manual.getString("media"));
                                 m.setCategoryID(manual.getString("categoryID"));
+                                m.setLocation(manual.getString("location"));
 
                                 manuals.add(m);
                             }
 
-                            manualAdapter = new ManualAdapter(MedicineActivity.this, manuals);
-                            list.setLayoutManager(new LinearLayoutManager(MedicineActivity.this));
+
+                            manualAdapter = new ManualAdapter(AdventureActivity.this, manuals);
+                            list.setHasFixedSize(true);
+                            GridLayoutManager gridLayoutManager = new GridLayoutManager(AdventureActivity.this,2);
+                            list.setLayoutManager(gridLayoutManager);
                             list.setAdapter(manualAdapter);
 
                         } catch (JSONException e) {
@@ -115,4 +121,11 @@ public class MedicineActivity extends AppCompatActivity {
         });
         mQueue.add(request);
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(AdventureActivity.this, ExperienceDashboardActivity.class));
+        finish();
+    }
+
 }

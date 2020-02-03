@@ -1,4 +1,4 @@
-package com.abdelrahman.irihackathon;
+package com.abdelrahman.irihackathon.ManualSection;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.abdelrahman.irihackathon.Common.Global;
+import com.abdelrahman.irihackathon.DashboardActivity;
+import com.abdelrahman.irihackathon.R;
 
 public class ManualDashboardActivity extends AppCompatActivity {
 

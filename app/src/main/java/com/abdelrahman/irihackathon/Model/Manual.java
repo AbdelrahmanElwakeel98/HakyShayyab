@@ -1,7 +1,7 @@
 package com.abdelrahman.irihackathon.Model;
 
 public class Manual {
-    private String title, description, categoryID, addedBy, media, blogID;
+    private String title, description, categoryID, addedBy, media, blogID, location;
 
     public Manual(){
     }
@@ -28,6 +28,14 @@ public class Manual {
 
     public String getBlogID() {
         return blogID;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     public void setBlogID(String blogID) {

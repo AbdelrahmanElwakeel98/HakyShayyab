@@ -1,4 +1,4 @@
-package com.abdelrahman.irihackathon.QuestionSection;
+package com.abdelrahman.irihackathon.ManualSection;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,12 +8,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.abdelrahman.irihackathon.Adapter.AnswerAdapter;
+import com.abdelrahman.irihackathon.Adapter.SongAdapter;
 import com.abdelrahman.irihackathon.Common.Constants;
 import com.abdelrahman.irihackathon.Common.Global;
-import com.abdelrahman.irihackathon.Model.Answer;
+import com.abdelrahman.irihackathon.Model.Manual;
 import com.abdelrahman.irihackathon.R;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,31 +28,24 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class QuestionCardActivity extends AppCompatActivity {
+public class SongsActivity extends AppCompatActivity {
 
-    private TextView txtQuestion;
     private ImageView back;
     private FloatingActionButton add;
 
     private RecyclerView list;
     private RequestQueue mQueue;
-    private ArrayList<Answer> answers;
-    private AnswerAdapter answerAdapter;
-
-    private String question, questionId;
+    private ArrayList<Manual> manuals;
+    private SongAdapter manualAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_question_card);
+        setContentView(R.layout.activity_songs);
 
-        list = findViewById(R.id.answers_list);
-        txtQuestion = findViewById(R.id.txt_question_display);
+        list = findViewById(R.id.songs_list);
         back = findViewById(R.id.back);
         add = findViewById(R.id.btn_add);
-
-        question = Global.selectedQuestion.getQuestion();
-        questionId = Global.selectedQuestion.getId();
 
         if (Global.userType.equals("Bedouin")){
             add.show();
@@ -61,31 +53,30 @@ public class QuestionCardActivity extends AppCompatActivity {
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(QuestionCardActivity.this, AddAnswerActivity.class));
+                    startActivity(new Intent(SongsActivity.this, AddActivity.class));
                     finish();
                 }
             });
         }
 
-        txtQuestion.setText(question);
-
-        mQueue = Volley.newRequestQueue(this);
-        answers = new ArrayList<>();
-
-        jsonParse(questionId);
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(QuestionCardActivity.this, QuestionsActivity.class));
+                startActivity(new Intent(SongsActivity.this, ManualDashboardActivity.class));
                 finish();
             }
         });
 
-    }
-    private void jsonParse(String questionId) {
+        mQueue = Volley.newRequestQueue(this);
+        manuals = new ArrayList<>();
 
-        String url = Constants.API_URL + "answers/getAnswers/" + questionId;
+        jsonParse("Poems and Songs");
+
+    }
+
+    private void jsonParse(String categoryId) {
+
+        String url = Constants.API_URL + "blogs/getBlogs/" + categoryId;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -95,22 +86,24 @@ public class QuestionCardActivity extends AppCompatActivity {
                             JSONArray jsonArray = response.getJSONArray("data");
 
 
-                            answers.clear();
+                            manuals.clear();
                             for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject question = jsonArray.getJSONObject(i);
+                                JSONObject manual = jsonArray.getJSONObject(i);
 
-                                Answer answer = new Answer();
-                                answer.setAnswer(question.getString("answer"));
-                                answer.setRating(question.getString("rating"));
-                                answer.setAddedBy(question.getString("addedBy"));
-                                answer.setAnswerID(question.getString("answerID"));
+                                Manual m = new Manual();
+                                m.setTitle(manual.getString("title"));
+                                m.setDescription(manual.getString("body"));
+                                m.setAddedBy(manual.getString("addedBy"));
+                                m.setBlogID(manual.getString("blogID"));
+                                m.setMedia(manual.getString("media"));
+                                m.setCategoryID(manual.getString("categoryID"));
 
-                                answers.add(answer);
+                                manuals.add(m);
                             }
 
-                            answerAdapter = new AnswerAdapter(QuestionCardActivity.this, answers);
-                            list.setLayoutManager(new LinearLayoutManager(QuestionCardActivity.this));
-                            list.setAdapter(answerAdapter);
+                            manualAdapter = new SongAdapter(SongsActivity.this, manuals);
+                            list.setLayoutManager(new LinearLayoutManager(SongsActivity.this));
+                            list.setAdapter(manualAdapter);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -127,7 +120,8 @@ public class QuestionCardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(QuestionCardActivity.this, QuestionsActivity.class));
+        startActivity(new Intent(SongsActivity.this, ManualDashboardActivity.class));
         finish();
     }
+
 }

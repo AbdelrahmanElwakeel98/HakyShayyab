@@ -109,7 +109,7 @@ public class DictionaryActivity extends AppCompatActivity {
                                 w = "";
                                 JSONObject words = jsonArray.getJSONObject(i);
 
-                                w += " " + words.getString("word") + " " + words.getString("arabicWord");
+                                w += " " + words.getString("word") + " -> " + words.getString("arabicWord");
                                 translated.add(w);
                             }
 

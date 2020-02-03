@@ -23,6 +23,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.auth.FirebaseAuth;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,10 +36,12 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder
 
     private Context context;
     private ArrayList<Answer> answers;
+    private FirebaseAuth auth;
 
     public AnswerAdapter(Context context, ArrayList<Answer> answers){
         this.context = context;
         this.answers = answers;
+        auth = FirebaseAuth.getInstance();
     }
 
     @NonNull
@@ -56,9 +62,9 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                 updateRating(answers.get(position).getAnswerID(), answers.get(position).getRating(), "1"
-                        , answers.get(position).getAddedBy());
-                answers.get(position).setRating(String.valueOf(Integer.valueOf(answers.get(position).getRating()) + 1));
-                notifyDataSetChanged();
+                        , answers.get(position).getAddedBy(), position);
+                /*answers.get(position).setRating(String.valueOf(Integer.valueOf(answers.get(position).getRating()) + 1));
+                notifyDataSetChanged();*/
             }
         });
 
@@ -66,9 +72,9 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                 updateRating(answers.get(position).getAnswerID(), answers.get(position).getRating(), "-1"
-                        , answers.get(position).getAddedBy());
-                answers.get(position).setRating(String.valueOf(Integer.valueOf(answers.get(position).getRating()) - 1));
-                notifyDataSetChanged();
+                        , answers.get(position).getAddedBy(), position);
+                /*answers.get(position).setRating(String.valueOf(Integer.valueOf(answers.get(position).getRating()) - 1));
+                notifyDataSetChanged();*/
             }
         });
 
@@ -100,7 +106,8 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder
         }
     }
 
-    private void updateRating(final String answerID, final String oldRate, final String status, final String addedBy){
+    private void updateRating(final String answerID, final String oldRate, final String status,
+                              final String addedBy, final int position){
         HttpsTrustManager.allowAllSSL();
         String url = Constants.API_URL + "answers/editRating/" + answerID;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -108,6 +115,19 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder
             public void onResponse(String response) {
                 Toast.makeText(context, response, Toast.LENGTH_LONG).show();
                 Log.e("Error", response);
+
+                try {
+                    JSONObject result = new JSONObject(response);
+
+                    String updatedRate = result.getString("rating");
+
+                    answers.get(position).setRating(updatedRate);
+                    notifyDataSetChanged();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -120,6 +140,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> params = new HashMap<>();
                 params.put("rating", oldRate);
+                params.put("uid", auth.getCurrentUser().getUid());
                 params.put("rateChange", status);
                 params.put("addedBy", addedBy);
                 return params;

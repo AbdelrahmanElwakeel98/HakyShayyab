@@ -131,7 +131,7 @@ public class BedouinQuestionsActivity extends AppCompatActivity {
                 params.put("bedouin", userType.equals("Bedouin")? "true" : "false");
 
                 // Inquiry
-                params.put("tribe", user.getTribe());
+                params.put("tribeID", Global.user.getTribe());
 
                 return params;
             }

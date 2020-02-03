@@ -1,4 +1,4 @@
-package com.abdelrahman.irihackathon;
+package com.abdelrahman.irihackathon.ManualSection;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +13,7 @@ import com.abdelrahman.irihackathon.Adapter.ManualAdapter;
 import com.abdelrahman.irihackathon.Common.Constants;
 import com.abdelrahman.irihackathon.Common.Global;
 import com.abdelrahman.irihackathon.Model.Manual;
+import com.abdelrahman.irihackathon.R;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -84,7 +85,7 @@ public class CarpetActivity extends AppCompatActivity {
                             JSONArray jsonArray = response.getJSONArray("data");
 
 
-
+                            manuals.clear();
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject manual = jsonArray.getJSONObject(i);
 
@@ -114,6 +115,12 @@ public class CarpetActivity extends AppCompatActivity {
             }
         });
         mQueue.add(request);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(CarpetActivity.this, ManualDashboardActivity.class));
+        finish();
     }
 
 }

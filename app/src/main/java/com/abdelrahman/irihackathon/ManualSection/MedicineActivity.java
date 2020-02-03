@@ -1,10 +1,11 @@
-package com.abdelrahman.irihackathon;
+package com.abdelrahman.irihackathon.ManualSection;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import com.abdelrahman.irihackathon.Adapter.ManualAdapter;
 import com.abdelrahman.irihackathon.Common.Constants;
 import com.abdelrahman.irihackathon.Common.Global;
 import com.abdelrahman.irihackathon.Model.Manual;
+import com.abdelrahman.irihackathon.R;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -27,7 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ClothingActivity extends AppCompatActivity {
+public class MedicineActivity extends AppCompatActivity {
 
     private ImageView back;
     private FloatingActionButton add;
@@ -40,9 +42,9 @@ public class ClothingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_clothing);
+        setContentView(R.layout.activity_medicine);
 
-        list = findViewById(R.id.clothing_list);
+        list = findViewById(R.id.medicine_list);
         back = findViewById(R.id.back);
         add = findViewById(R.id.btn_add);
 
@@ -52,7 +54,7 @@ public class ClothingActivity extends AppCompatActivity {
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(ClothingActivity.this, AddActivity.class));
+                    startActivity(new Intent(MedicineActivity.this, AddActivity.class));
                     finish();
                 }
             });
@@ -61,7 +63,7 @@ public class ClothingActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ClothingActivity.this, ManualDashboardActivity.class));
+                startActivity(new Intent(MedicineActivity.this, ManualDashboardActivity.class));
                 finish();
             }
         });
@@ -84,7 +86,7 @@ public class ClothingActivity extends AppCompatActivity {
                             JSONArray jsonArray = response.getJSONArray("data");
 
 
-
+                            manuals.clear();
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject manual = jsonArray.getJSONObject(i);
 
@@ -99,8 +101,8 @@ public class ClothingActivity extends AppCompatActivity {
                                 manuals.add(m);
                             }
 
-                            manualAdapter = new ManualAdapter(ClothingActivity.this, manuals);
-                            list.setLayoutManager(new LinearLayoutManager(ClothingActivity.this));
+                            manualAdapter = new ManualAdapter(MedicineActivity.this, manuals);
+                            list.setLayoutManager(new LinearLayoutManager(MedicineActivity.this));
                             list.setAdapter(manualAdapter);
 
                         } catch (JSONException e) {
@@ -116,4 +118,9 @@ public class ClothingActivity extends AppCompatActivity {
         mQueue.add(request);
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(MedicineActivity.this, ManualDashboardActivity.class));
+        finish();
+    }
 }

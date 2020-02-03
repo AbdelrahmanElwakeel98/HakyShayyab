@@ -105,6 +105,7 @@ public class QuestionsActivity extends AppCompatActivity {
                         Intent intent = new Intent(QuestionsActivity.this, QuestionCardActivity.class);
                         Global.selectedQuestion = questions.get(position);
                         startActivity(intent);
+                        finish();
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
@@ -126,6 +127,7 @@ public class QuestionsActivity extends AppCompatActivity {
                         try {
                             JSONArray jsonArray = response.getJSONArray("data");
 
+                            questions.clear();
 
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject question = jsonArray.getJSONObject(i);

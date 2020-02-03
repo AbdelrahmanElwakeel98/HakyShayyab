@@ -178,9 +178,9 @@ public class RegistrationActivity extends AppCompatActivity implements IDialogBo
 
             @Override
             public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-                Toast.makeText(RegistrationActivity.this, R.string.verification_success, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(RegistrationActivity.this, R.string.verification_success, Toast.LENGTH_SHORT).show();
 
-                if (userType.equals("Bedouin")) {
+                /*if (userType.equals("Bedouin")) {
                     Intent intent = new Intent(RegistrationActivity.this, BedouinQuestionsActivity.class);
                     startActivity(intent);
                     customDialogBox.dismissDialog();
@@ -190,7 +190,7 @@ public class RegistrationActivity extends AppCompatActivity implements IDialogBo
                     startActivity(intent);
                     customDialogBox.dismissDialog();
                     finish();
-                }
+                }*/
 
             }
 

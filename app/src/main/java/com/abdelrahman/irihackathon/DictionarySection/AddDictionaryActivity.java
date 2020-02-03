@@ -9,10 +9,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.abdelrahman.irihackathon.Common.Constants;
 import com.abdelrahman.irihackathon.Common.HttpsTrustManager;
+import com.abdelrahman.irihackathon.DashboardActivity;
 import com.abdelrahman.irihackathon.R;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -30,6 +32,7 @@ public class AddDictionaryActivity extends AppCompatActivity {
 
     private EditText edtWord, edtMeaning;
     private Button btnAdd;
+    private ImageView back;
     private FirebaseAuth auth;
 
     @Override
@@ -40,8 +43,17 @@ public class AddDictionaryActivity extends AppCompatActivity {
         edtWord = findViewById(R.id.edt_word);
         edtMeaning = findViewById(R.id.edt_word_translated);
         btnAdd = findViewById(R.id.btn_done_add);
+        back = findViewById(R.id.back);
 
         auth = FirebaseAuth.getInstance();
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AddDictionaryActivity.this, DictionaryActivity.class));
+                finish();
+            }
+        });
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +74,7 @@ public class AddDictionaryActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 Toast.makeText(AddDictionaryActivity.this, response, Toast.LENGTH_LONG).show();
                 Log.e("Error", response);
-                startActivity(new Intent(AddDictionaryActivity.this, AddDictionaryActivity.class));
+                startActivity(new Intent(AddDictionaryActivity.this, DictionaryActivity.class));
                 finish();
             }
         }, new Response.ErrorListener() {
@@ -84,5 +96,11 @@ public class AddDictionaryActivity extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(AddDictionaryActivity.this, DictionaryActivity.class));
+        finish();
     }
 }

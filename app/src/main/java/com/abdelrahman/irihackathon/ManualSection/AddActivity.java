@@ -1,4 +1,4 @@
- package com.abdelrahman.irihackathon;
+ package com.abdelrahman.irihackathon.ManualSection;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,11 +16,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.abdelrahman.irihackathon.ExperienceSection.AdventureActivity;
+import com.abdelrahman.irihackathon.ExperienceSection.BedouinFoodActivity;
 import com.abdelrahman.irihackathon.Common.Constants;
 import com.abdelrahman.irihackathon.Common.Global;
 import com.abdelrahman.irihackathon.Common.HttpsTrustManager;
-import com.abdelrahman.irihackathon.QuestionSection.AddQuestionsActivity;
-import com.abdelrahman.irihackathon.QuestionSection.QuestionsActivity;
+import com.abdelrahman.irihackathon.R;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -86,7 +87,7 @@ import java.util.UUID;
         storageReference = storage.getReference();
 
 
-        if (Global.categoryManual.equals("Experience")){
+        if (Global.chooseManual.equals("Experience")){
             edtLocation.setVisibility(View.VISIBLE);
         }
 
@@ -143,10 +144,6 @@ import java.util.UUID;
                                                 // getting image uri and converting into string
                                                 Uri downloadUrl = uri;
                                                 media = downloadUrl.toString();
-
-                                                edtTitle.setText(media);
-
-
                                             }
                                         });
 
@@ -183,7 +180,7 @@ import java.util.UUID;
                             !TextUtils.isEmpty(edtDescription.getText().toString())
                     && !TextUtils.isEmpty(edtLocation.getText().toString()))
                         addExperience(edtTitle.getText().toString()
-                                , Global.categoryManual, auth.getCurrentUser().getUid(), media
+                                , Global.categoryExperience, auth.getCurrentUser().getUid(), media
                                 , edtDescription.getText().toString(), edtLocation.getText().toString());
                 }
 
@@ -253,11 +250,11 @@ import java.util.UUID;
                  Toast.makeText(AddActivity.this, response, Toast.LENGTH_LONG).show();
                  Log.e("Error", response);
 
-                 if (Global.categoryExperience.equals(getResources().getString(R.string.adventure))){
+                 if (Global.categoryExperience.equals("Adventure")){
                      startActivity(new Intent(AddActivity.this, AdventureActivity.class));
                      finish();
-                 } else if (Global.categoryExperience.equals(getResources().getString(R.string.cooking))){
-                     startActivity(new Intent(AddActivity.this, BedouinQuestionsActivity.class));
+                 } else if (Global.categoryExperience.equals("BedouinFood")){
+                     startActivity(new Intent(AddActivity.this, BedouinFoodActivity.class));
                      finish();
                  }
 
@@ -307,11 +304,11 @@ import java.util.UUID;
              }
          } else if (Global.chooseManual.equals("Experience")){
 
-             if (Global.categoryExperience.equals(getResources().getString(R.string.adventure))){
+             if (Global.categoryExperience.equals("Adventure")){
                  startActivity(new Intent(AddActivity.this, AdventureActivity.class));
                  finish();
-             } else if (Global.categoryExperience.equals(getResources().getString(R.string.cooking))){
-                 startActivity(new Intent(AddActivity.this, BedouinQuestionsActivity.class));
+             } else if (Global.categoryExperience.equals("BedouinFood")){
+                 startActivity(new Intent(AddActivity.this, BedouinFoodActivity.class));
                  finish();
              }
          }

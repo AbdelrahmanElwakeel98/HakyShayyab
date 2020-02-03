@@ -13,6 +13,8 @@ import android.widget.Button;
 
 import com.abdelrahman.irihackathon.Common.Global;
 import com.abdelrahman.irihackathon.DictionarySection.DictionaryActivity;
+import com.abdelrahman.irihackathon.ExperienceSection.ExperienceDashboardActivity;
+import com.abdelrahman.irihackathon.ManualSection.ManualDashboardActivity;
 import com.abdelrahman.irihackathon.QuestionSection.QuestionsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 

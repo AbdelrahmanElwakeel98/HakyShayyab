@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.abdelrahman.irihackathon.Common.Global;
 import com.abdelrahman.irihackathon.Model.Answer;
 import com.abdelrahman.irihackathon.Model.Manual;
 import com.abdelrahman.irihackathon.R;
@@ -30,16 +31,30 @@ public class ManualAdapter extends RecyclerView.Adapter<ManualAdapter.ViewHolder
     @NonNull
     @Override
     public ManualAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_row_manual,parent,false);
-        ManualAdapter.ViewHolder holder = new ViewHolder(v);
-        return holder;
+        if (Global.chooseManual.equals("Manual")){
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_row_manual,parent,false);
+            ManualAdapter.ViewHolder holder = new ViewHolder(v);
+            return holder;
+        } else {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_row_experience,parent,false);
+            ManualAdapter.ViewHolder holder = new ViewHolder(v);
+            return holder;
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull ManualAdapter.ViewHolder holder, int position) {
-        holder.title.setText(manuals.get(position).getTitle());
-        holder.description.setText(manuals.get(position).getDescription());
-        Picasso.get().load(manuals.get(position).getMedia()).into(holder.img);
+
+        if (Global.chooseManual.equals("Manual")){
+            holder.title.setText(manuals.get(position).getTitle());
+            holder.description.setText(manuals.get(position).getDescription());
+            Picasso.get().load(manuals.get(position).getMedia()).into(holder.img);
+        } else {
+            holder.title.setText(manuals.get(position).getTitle());
+            holder.description.setText(manuals.get(position).getLocation());
+            Picasso.get().load(manuals.get(position).getMedia()).into(holder.img);
+        }
+
     }
 
     @Override
