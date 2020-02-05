@@ -79,6 +79,7 @@
     <string name="cooking">أماكن للأكل البدوي</string>
 
     <string name="upload">ارفع الملف</string>
+    <string name="upload_progress">جاري الرفع</string>
 
     <string name="play">تشغيل</string>
     <string name="stop">ايقاف</string>

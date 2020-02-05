@@ -12,7 +12,10 @@ import android.widget.ImageView;
 import com.abdelrahman.irihackathon.Adapter.ManualAdapter;
 import com.abdelrahman.irihackathon.Common.Constants;
 import com.abdelrahman.irihackathon.Common.Global;
+import com.abdelrahman.irihackathon.Common.RecyclerItemClickListener;
 import com.abdelrahman.irihackathon.Model.Manual;
+import com.abdelrahman.irihackathon.QuestionSection.QuestionCardActivity;
+import com.abdelrahman.irihackathon.QuestionSection.QuestionsActivity;
 import com.abdelrahman.irihackathon.R;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -69,6 +72,8 @@ public class CarpetActivity extends AppCompatActivity {
 
         mQueue = Volley.newRequestQueue(this);
         manuals = new ArrayList<>();
+
+        list.setAdapter(manualAdapter);
 
         jsonParse(Global.categoryManual);
     }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.abdelrahman.irihackathon.Interface.IDialogBoxListener;
 import com.abdelrahman.irihackathon.R;
@@ -28,7 +29,7 @@ public class CustomDialogBox {
         return mDialog;
     }
 
-    public void showLoginDialog(Context context,
+    public void showLoginDialog(final Context context,
                                 final IDialogBoxListener iDialogBoxListener)
     {
         this.iDialogBoxListener = iDialogBoxListener;
@@ -50,7 +51,11 @@ public class CustomDialogBox {
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iDialogBoxListener.onClickPositiveButton(dialog, pinView.getText().toString());
+                if (!pinView.getText().toString().isEmpty()){
+                    iDialogBoxListener.onClickPositiveButton(dialog, pinView.getText().toString());
+                } else {
+                    Toast.makeText(context, "Enter the code!", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

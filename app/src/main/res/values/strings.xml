@@ -78,6 +78,7 @@
     <string name="cooking">Bedouin Food</string>
 
     <string name="upload">Upload</string>
+    <string name="upload_progress">Uploading</string>
 
     <string name="play">Play</string>
     <string name="stop">Pause</string>

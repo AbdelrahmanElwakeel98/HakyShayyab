@@ -12,7 +12,10 @@ import android.widget.ImageView;
 import com.abdelrahman.irihackathon.Adapter.ManualAdapter;
 import com.abdelrahman.irihackathon.Common.Constants;
 import com.abdelrahman.irihackathon.Common.Global;
+import com.abdelrahman.irihackathon.Common.RecyclerItemClickListener;
 import com.abdelrahman.irihackathon.ManualSection.AddActivity;
+import com.abdelrahman.irihackathon.ManualSection.CarpetActivity;
+import com.abdelrahman.irihackathon.ManualSection.ManualCard;
 import com.abdelrahman.irihackathon.Model.Manual;
 import com.abdelrahman.irihackathon.R;
 import com.android.volley.Request;
@@ -72,6 +75,21 @@ public class AdventureActivity extends AppCompatActivity {
         manuals = new ArrayList<>();
 
         jsonParse(Global.categoryExperience);
+
+        list.addOnItemTouchListener(
+                new RecyclerItemClickListener(AdventureActivity.this, list ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        Intent intent = new Intent(AdventureActivity.this, ManualCard.class);
+                        Global.manualObject = manuals.get(position);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                    @Override public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
     }
 
     private void jsonParse(String categoryId) {

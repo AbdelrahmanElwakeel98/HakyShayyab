@@ -299,7 +299,9 @@ public class RegistrationActivity extends AppCompatActivity implements IDialogBo
 
     @Override
     public void onClickNegativeButton(DialogInterface dialogInterface) {
-        phoneNumber = "+20" + edtPhone.getText().toString();
+        phoneNumber = Global.user.getPhone();
+
+        Toast.makeText(RegistrationActivity.this, phoneNumber, Toast.LENGTH_LONG).show();
 
         resendVerificationCode(phoneNumber, mResendToken);
     }

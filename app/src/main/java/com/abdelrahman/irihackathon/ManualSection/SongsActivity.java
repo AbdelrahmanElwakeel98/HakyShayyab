@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.abdelrahman.irihackathon.Adapter.ManualAdapter;
 import com.abdelrahman.irihackathon.Adapter.SongAdapter;
 import com.abdelrahman.irihackathon.Common.Constants;
 import com.abdelrahman.irihackathon.Common.Global;
@@ -36,7 +37,7 @@ public class SongsActivity extends AppCompatActivity {
     private RecyclerView list;
     private RequestQueue mQueue;
     private ArrayList<Manual> manuals;
-    private SongAdapter manualAdapter;
+    private ManualAdapter manualAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +102,7 @@ public class SongsActivity extends AppCompatActivity {
                                 manuals.add(m);
                             }
 
-                            manualAdapter = new SongAdapter(SongsActivity.this, manuals);
+                            manualAdapter = new ManualAdapter(SongsActivity.this, manuals);
                             list.setLayoutManager(new LinearLayoutManager(SongsActivity.this));
                             list.setAdapter(manualAdapter);
 

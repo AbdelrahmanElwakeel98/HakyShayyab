@@ -3,8 +3,11 @@
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -115,13 +118,21 @@ import java.util.UUID;
         dialog.setDialogSelectionListener(new DialogSelectionListener() {
             @Override
             public void onSelectedFilePaths(String[] files) {
-                // Defining the child of storageReference
 
+                //displaying progress dialog while image is uploading
+                final ProgressDialog progressDialog = new ProgressDialog(AddActivity.this);
+                progressDialog.setTitle(R.string.upload_progress);
+                progressDialog.setCancelable(false);
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.show();
+
+                // Defining the child of storageReference
                 final StorageReference ref
                         = storageReference
                         .child(UUID.randomUUID().toString());
 
                 Uri file = Uri.fromFile(new File(files[0]));
+                final Ringtone r = RingtoneManager.getRingtone(AddActivity.this, file);
 
                 files = new String[0];
 
@@ -141,6 +152,12 @@ import java.util.UUID;
                                         ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                             @Override
                                             public void onSuccess(Uri uri) {
+
+                                                //dismissing the progress dialog
+                                                progressDialog.dismiss();
+
+                                                uploadedName.setText(r.getTitle(AddActivity.this));
+
                                                 // getting image uri and converting into string
                                                 Uri downloadUrl = uri;
                                                 media = downloadUrl.toString();
@@ -153,15 +170,14 @@ import java.util.UUID;
                             @Override
                             public void onFailure(@NonNull Exception e)
                             {
+                                progressDialog.dismiss();
                                 Toast.makeText(AddActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-
-                                edtTitle.setText(e.getMessage());
                             }
                         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                         double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                        Toast.makeText(AddActivity.this, String.valueOf(progress), Toast.LENGTH_LONG).show();
+                        progressDialog.setMessage(getResources().getString(R.string.upload_progress) + " " + ((int) progress) + "% ...");
                     }});
             }
         });

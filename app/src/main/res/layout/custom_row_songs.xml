@@ -31,7 +31,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:textSize="22sp"
+                    android:text="Sample"
+                    android:textSize="16sp"
                     android:textStyle="bold"></TextView>
 
                 <TextView
@@ -39,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:textSize="20sp"
+                    android:textSize="14sp"
                     android:ellipsize="end"
                     android:maxLines="1"></TextView>
 
@@ -71,8 +72,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:text="Period"
+                        android:textSize="12sp"
                         android:id="@+id/txt_max"
                         android:layout_gravity="center_horizontal">
                     </TextView>
@@ -86,29 +86,21 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="5dp">
 
-                    <Button
-                        android:background="@null"
+                    <ImageView
+                        android:src="@drawable/pause"
                         android:textColor="@color/colorAccent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pause"
                         android:id="@+id/button_pause"
-                        android:layout_alignBottom="@+id/button_start"
-                        android:layout_toRightOf="@+id/button_start"
-                        android:layout_toEndOf="@+id/button_start"
+                        android:layout_margin="5dp"
                         />
 
-                    <Button
-                        android:background="@drawable/custom_button"
-                        android:textColor="#FFFFFF"
+                    <ImageView
+                        android:src="@drawable/play"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Start"
                         android:id="@+id/button_start"
-                        android:layout_alignBottom="@+id/button_rewind"
-                        android:layout_toRightOf="@+id/button_rewind"
-                        android:layout_toEndOf="@+id/button_rewind"
-                        android:layout_marginRight="25dp"
+                        android:layout_margin="5dp"
                         />
 
 
