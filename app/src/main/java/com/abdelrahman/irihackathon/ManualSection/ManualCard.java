@@ -68,12 +68,12 @@ public class ManualCard extends AppCompatActivity {
             location.setVisibility(View.VISIBLE);
 
             headline.setText(Global.manualObject.getTitle());
-            description.setText(Global.manualObject.getLocation());
+            description.setText(Global.manualObject.getDescription());
             location.setText(Global.manualObject.getLocation());
             Picasso.get().load(Global.manualObject.getMedia()).into(img);
         } else {
             headline.setText(Global.manualObject.getTitle());
-            description.setText(Global.manualObject.getLocation());
+            description.setText(Global.manualObject.getDescription());
             Picasso.get().load(Global.manualObject.getMedia()).into(img);
         }
     }

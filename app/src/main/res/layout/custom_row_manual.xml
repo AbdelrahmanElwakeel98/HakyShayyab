@@ -32,7 +32,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Sample"
                     android:textSize="16sp"
                     android:textStyle="bold"></TextView>
 
@@ -42,7 +41,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textSize="14sp"
-                    android:text="Sample"
                     android:ellipsize="end"
                     android:textAlignment="center"></TextView>
 
