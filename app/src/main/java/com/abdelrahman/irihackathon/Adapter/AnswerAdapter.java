@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.abdelrahman.irihackathon.Common.Constants;
+import com.abdelrahman.irihackathon.Common.Global;
 import com.abdelrahman.irihackathon.Common.HttpsTrustManager;
 import com.abdelrahman.irihackathon.Model.Answer;
 import com.abdelrahman.irihackathon.R;
@@ -113,8 +114,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(context, response, Toast.LENGTH_LONG).show();
-                Log.e("Error", response);
+                Toast.makeText(context, context.getString(R.string.add_done), Toast.LENGTH_LONG).show();
 
                 try {
                     JSONObject result = new JSONObject(response);
@@ -140,7 +140,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> params = new HashMap<>();
                 params.put("rating", oldRate);
-                params.put("uid", auth.getCurrentUser().getUid());
+                params.put("uid", Global.UID);
                 params.put("rateChange", status);
                 params.put("addedBy", addedBy);
                 return params;

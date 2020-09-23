@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -266,6 +267,9 @@ public class RegistrationActivity extends AppCompatActivity implements IDialogBo
             public void onResponse(String response) {
                 Toast.makeText(RegistrationActivity.this, "Done", Toast.LENGTH_LONG).show();
 
+                Global.UID = auth.getCurrentUser().getUid();
+                saveLoggedUser(false, auth.getCurrentUser().getUid());
+
                 Intent intent = new Intent(RegistrationActivity.this, DashboardActivity.class);
                 startActivity(intent);
                 dialogInterface.dismiss();
@@ -295,6 +299,21 @@ public class RegistrationActivity extends AppCompatActivity implements IDialogBo
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    private void saveLoggedUser(boolean isBedouin, String user_id){
+
+        SharedPreferences sp;
+        sp = getSharedPreferences("shayyab_logged_user", MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sp.edit();
+
+        editor.putBoolean("isLogged",true);
+        editor.putBoolean("isBedouin", isBedouin);
+        editor.putString("user_id", user_id);
+
+        editor.apply();
+
     }
 
     @Override

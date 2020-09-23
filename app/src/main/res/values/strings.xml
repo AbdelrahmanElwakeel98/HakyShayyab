@@ -114,6 +114,10 @@
     <string name="q3_answer2">2</string>
     <string name="q3_answer3">4</string>
 
+    <string name="auth_null_alert">Your login session is expired. Please logout then login again.</string>
+
+    <string name="add_done">Your operation is done successfully!</string>
+
 
 
 

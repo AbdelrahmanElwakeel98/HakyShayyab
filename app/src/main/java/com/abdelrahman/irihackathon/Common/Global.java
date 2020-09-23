@@ -6,6 +6,7 @@ import com.abdelrahman.irihackathon.Model.User;
 
 public class Global {
     public static String userType = "";
+    public static String UID = "";
     public static User user;
     public static String categoryQuestion = "";
     public static Question selectedQuestion;

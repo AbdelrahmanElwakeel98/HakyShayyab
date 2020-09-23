@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -103,12 +104,17 @@ public class LoginActivity extends AppCompatActivity implements IDialogBoxListen
             public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
                 Toast.makeText(LoginActivity.this, R.string.verification_success, Toast.LENGTH_SHORT).show();
 
+                Global.UID = auth.getCurrentUser().getUid();
+                Log.e("UID", auth.getCurrentUser().getUid());
+
                 if (userType.equals("Bedouin")){
+                    saveLoggedUser(true, auth.getCurrentUser().getUid());
                     Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                     startActivity(intent);
                     customDialogBox.dismissDialog();
                     finish();
                 } else {
+                    saveLoggedUser(false, auth.getCurrentUser().getUid());
                     Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                     startActivity(intent);
                     customDialogBox.dismissDialog();
@@ -119,6 +125,7 @@ public class LoginActivity extends AppCompatActivity implements IDialogBoxListen
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
+                Log.e("error", e.getMessage());
                 Toast.makeText(LoginActivity.this, R.string.verification_fail, Toast.LENGTH_SHORT).show();
             }
             @Override
@@ -154,8 +161,23 @@ public class LoginActivity extends AppCompatActivity implements IDialogBoxListen
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                            startActivity(intent);
+
+                            Global.UID = auth.getCurrentUser().getUid();
+
+                            if (userType.equals("Bedouin")){
+                                saveLoggedUser(true, auth.getCurrentUser().getUid());
+                                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                                startActivity(intent);
+                                customDialogBox.dismissDialog();
+                                finish();
+                            } else {
+                                saveLoggedUser(false, auth.getCurrentUser().getUid());
+                                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                                startActivity(intent);
+                                customDialogBox.dismissDialog();
+                                finish();
+                            }
+
                             dialogInterface.dismiss();
                             finish();
                         } else {
@@ -174,6 +196,21 @@ public class LoginActivity extends AppCompatActivity implements IDialogBoxListen
                 this,               // Activity (for callback binding)
                 mCallback,         // OnVerificationStateChangedCallbacks
                 token);             // ForceResendingToken from callbacks
+    }
+
+    private void saveLoggedUser(boolean isBedouin, String user_id){
+
+        SharedPreferences sp;
+        sp = getSharedPreferences("shayyab_logged_user", MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sp.edit();
+
+        editor.putBoolean("isLogged",true);
+        editor.putBoolean("isBedouin", isBedouin);
+        editor.putString("user_id", user_id);
+
+        editor.apply();
+
     }
 
     @Override

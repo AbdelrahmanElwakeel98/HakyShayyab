@@ -13,8 +13,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.abdelrahman.irihackathon.Common.Constants;
+import com.abdelrahman.irihackathon.Common.Global;
 import com.abdelrahman.irihackathon.Common.HttpsTrustManager;
 import com.abdelrahman.irihackathon.DashboardActivity;
+import com.abdelrahman.irihackathon.QuestionSection.AddQuestionsActivity;
 import com.abdelrahman.irihackathon.R;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -60,7 +62,13 @@ public class AddDictionaryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!TextUtils.isEmpty(edtWord.getText().toString()) &&
                         !TextUtils.isEmpty(edtMeaning.getText().toString())){
-                    addWord(auth.getCurrentUser().getUid(), edtWord.getText().toString(), edtMeaning.getText().toString());
+                    auth = FirebaseAuth.getInstance();
+
+                    if (Global.UID == ""){
+                        Toast.makeText(AddDictionaryActivity.this, R.string.auth_null_alert, Toast.LENGTH_LONG).show();
+                    } else {
+                        addWord(Global.UID, edtWord.getText().toString(), edtMeaning.getText().toString());
+                    }
                 }
             }
         });
@@ -72,7 +80,7 @@ public class AddDictionaryActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(AddDictionaryActivity.this, response, Toast.LENGTH_LONG).show();
+                Toast.makeText(AddDictionaryActivity.this, getString(R.string.add_done), Toast.LENGTH_LONG).show();
                 Log.e("Error", response);
                 startActivity(new Intent(AddDictionaryActivity.this, DictionaryActivity.class));
                 finish();

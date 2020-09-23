@@ -116,4 +116,8 @@
     <string name="q3_answer2">2</string>
     <string name="q3_answer3">4</string>
 
+    <string name="auth_null_alert">برجاء تسجيل الخروج ثم اعادة تسجيل الدخول مرة أخري.</string>
+
+    <string name="add_done">تمت عمليتك بنجاح!</string>
+
 </resources>

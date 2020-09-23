@@ -51,8 +51,6 @@ public class AddQuestionsActivity extends AppCompatActivity {
         userType = Global.userType;
         categoryID = Global.categoryQuestion;
 
-        auth = FirebaseAuth.getInstance();
-
         /*Gson gson = new Gson();
         user = gson.fromJson(userData, User.class);*/
 
@@ -60,7 +58,13 @@ public class AddQuestionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!TextUtils.isEmpty(edtQuestion.getText().toString())){
-                    askQuestion(auth.getCurrentUser().getUid(), categoryID, edtQuestion.getText().toString());
+                    auth = FirebaseAuth.getInstance();
+
+                    if (Global.UID == ""){
+                        Toast.makeText(AddQuestionsActivity.this, R.string.auth_null_alert, Toast.LENGTH_LONG).show();
+                    } else {
+                        askQuestion(Global.UID, categoryID, edtQuestion.getText().toString());
+                    }
                 }
             }
         });
@@ -80,8 +84,8 @@ public class AddQuestionsActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(AddQuestionsActivity.this, response, Toast.LENGTH_LONG).show();
-                Log.e("Error", response);
+                Toast.makeText(AddQuestionsActivity.this, getString(R.string.add_done), Toast.LENGTH_LONG).show();
+
                 Intent intent = new Intent(AddQuestionsActivity.this, QuestionsActivity.class);
                 startActivity(intent);
                 finish();

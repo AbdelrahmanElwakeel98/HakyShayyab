@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -94,6 +95,15 @@ public class DashboardActivity extends AppCompatActivity {
 
             case R.id.logout:
                 auth.signOut();
+
+                SharedPreferences preferences =getSharedPreferences("shayyab_logged_user", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.apply();
+
+                Global.UID = "";
+                Global.userType = "";
+
                 startActivity(new Intent(DashboardActivity.this, MainActivity.class));
                 finish();
                 return true;

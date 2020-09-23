@@ -47,13 +47,18 @@ public class AddAnswerActivity extends AppCompatActivity {
         edtAnswer = findViewById(R.id.edt_answer);
         back = findViewById(R.id.back);
 
-        auth = FirebaseAuth.getInstance();
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!TextUtils.isEmpty(edtAnswer.getText().toString())){
-                    addAnswer(auth.getCurrentUser().getUid(), edtAnswer.getText().toString(), Global.selectedQuestion.getId());
+                    auth = FirebaseAuth.getInstance();
+
+                    if (Global.UID == ""){
+                        Toast.makeText(AddAnswerActivity.this, R.string.auth_null_alert, Toast.LENGTH_LONG).show();
+                    } else {
+                        addAnswer(Global.UID, edtAnswer.getText().toString(), Global.selectedQuestion.getId());
+                    }
                 }
             }
         });
@@ -73,7 +78,7 @@ public class AddAnswerActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(AddAnswerActivity.this, response, Toast.LENGTH_LONG).show();
+                Toast.makeText(AddAnswerActivity.this, getString(R.string.add_done), Toast.LENGTH_LONG).show();
                 Log.e("Error", response);
                 startActivity(new Intent(AddAnswerActivity.this, QuestionCardActivity.class));
                 finish();

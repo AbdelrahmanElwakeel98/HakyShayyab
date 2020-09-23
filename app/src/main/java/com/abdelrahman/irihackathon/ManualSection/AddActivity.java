@@ -24,6 +24,7 @@ import com.abdelrahman.irihackathon.ExperienceSection.BedouinFoodActivity;
 import com.abdelrahman.irihackathon.Common.Constants;
 import com.abdelrahman.irihackathon.Common.Global;
 import com.abdelrahman.irihackathon.Common.HttpsTrustManager;
+import com.abdelrahman.irihackathon.QuestionSection.AddQuestionsActivity;
 import com.abdelrahman.irihackathon.R;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -188,16 +189,29 @@ import java.util.UUID;
                 if (Global.chooseManual.equals("Manual")){
                     if (!TextUtils.isEmpty(edtTitle.getText().toString()) &&
                             !TextUtils.isEmpty(edtDescription.getText().toString()))
+                        auth = FirebaseAuth.getInstance();
+
+                    if (Global.UID == ""){
+                        Toast.makeText(AddActivity.this, R.string.auth_null_alert, Toast.LENGTH_LONG).show();
+                    } else {
                         addManual(edtTitle.getText().toString()
-                                , Global.categoryManual, auth.getCurrentUser().getUid(), media
+                                , Global.categoryManual, Global.UID, media
                                 , edtDescription.getText().toString());
+                    }
                 } else if (Global.chooseManual.equals("Experience")){
                     if (!TextUtils.isEmpty(edtTitle.getText().toString()) &&
                             !TextUtils.isEmpty(edtDescription.getText().toString())
                     && !TextUtils.isEmpty(edtLocation.getText().toString()))
+
+                        auth = FirebaseAuth.getInstance();
+
+                    if (Global.UID == ""){
+                        Toast.makeText(AddActivity.this, R.string.auth_null_alert, Toast.LENGTH_LONG).show();
+                    } else {
                         addExperience(edtTitle.getText().toString()
-                                , Global.categoryExperience, auth.getCurrentUser().getUid(), media
+                                , Global.categoryExperience, Global.UID, media
                                 , edtDescription.getText().toString(), edtLocation.getText().toString());
+                    }
                 }
 
             }
@@ -213,8 +227,7 @@ import java.util.UUID;
          StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
              @Override
              public void onResponse(String response) {
-                 Toast.makeText(AddActivity.this, response, Toast.LENGTH_LONG).show();
-                 Log.e("Error", response);
+                 Toast.makeText(AddActivity.this, getString(R.string.add_done), Toast.LENGTH_LONG).show();
 
                  if (Global.categoryManual.equals(getResources().getString(R.string.manual_dashboard_songs))){
                      startActivity(new Intent(AddActivity.this, SongsActivity.class));
@@ -263,7 +276,7 @@ import java.util.UUID;
          StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
              @Override
              public void onResponse(String response) {
-                 Toast.makeText(AddActivity.this, response, Toast.LENGTH_LONG).show();
+                 Toast.makeText(AddActivity.this, getString(R.string.add_done), Toast.LENGTH_LONG).show();
                  Log.e("Error", response);
 
                  if (Global.categoryExperience.equals("Adventure")){

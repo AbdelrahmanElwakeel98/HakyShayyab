@@ -3,6 +3,7 @@ package com.abdelrahman.irihackathon;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -39,56 +40,37 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (auth.getCurrentUser() != null){
-                    jsonParse(auth.getCurrentUser().getUid());
 
+                if (checkLoggedUsers()){
+                    startActivity(new Intent(SplashScreen.this, DashboardActivity.class));
+                    SplashScreen.this.finish();
                 } else {
                     startActivity(new Intent(SplashScreen.this, MainActivity.class));
                     SplashScreen.this.finish();
                 }
+
             }
         },SPLASH_DISPLAY_LENGTH);
     }
 
-    private void jsonParse(String uid) {
+    private boolean checkLoggedUsers(){
 
-        String url = Constants.API_URL + "users/user/" + uid;
+        SharedPreferences sp;
+        sp = getSharedPreferences("shayyab_logged_user", MODE_PRIVATE);
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONObject userJson = response.getJSONObject("data");
+        if (sp.getBoolean("isLogged",false)){
 
-                            User currentUser = new User();
+            Global.UID = sp.getString("user_id", "");
 
-                            currentUser.setUsername(userJson.getString("fullName"));
-                            currentUser.setPhone(userJson.getString("phoneNumber"));
-
-                            boolean checkUserType = userJson.getBoolean("isBedouin");
-
-                            if (checkUserType){
-                                Global.userType = "Bedouin";
-                            } else {
-                                Global.userType = "User";
-                            }
-
-                            Global.user = currentUser;
-
-                            startActivity(new Intent(SplashScreen.this, DashboardActivity.class));
-                            SplashScreen.this.finish();
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
+            if ( sp.getBoolean("isBedouin", false)){
+                Global.userType = "Bedouin";
+            } else {
+                Global.userType = "User";
             }
-        });
-        mQueue.add(request);
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }
